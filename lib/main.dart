@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:animated_emoji/animated_emoji.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,95 +33,182 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
+  const MyHomePage({super.key});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  static const double actionButtonSize = 15.0;
+  Color fontColor = Colors.black;
+  bool light = true;
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
+    final MaterialStateProperty<Color?> trackColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        // Track color when the switch is selected.
+        if (states.contains(MaterialState.selected)) {
+          return Colors.amber;
+        }
+        // Otherwise return null to set default track color
+        // for remaining states such as when the switch is
+        // hovered, focused, or disabled.
+        return null;
+      },
+    );
+    final MaterialStateProperty<Color?> overlayColor =
+        MaterialStateProperty.resolveWith<Color?>(
+      (Set<MaterialState> states) {
+        // Material color when switch is selected.
+        if (states.contains(MaterialState.selected)) {
+          return Colors.amber.withOpacity(0.54);
+        }
+        // Material color when switch is disabled.
+        if (states.contains(MaterialState.disabled)) {
+          return Colors.grey.shade400;
+        }
+        // Otherwise return null to set default material color
+        // for remaining states such as when the switch is
+        // hovered, or focused.
+        return null;
+      },
+    );
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+        appBar: AppBar(
+          actions: [
+            TextButton(
+                onPressed: () {},
+                child: Text(
+                  "HOME",
+                  style:
+                      TextStyle(fontSize: actionButtonSize, color: fontColor),
+                )),
+            SizedBox(
+              width: 30,
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            TextButton(
+                onPressed: () {},
+                child: Text("ABOUT",
+                    style: TextStyle(
+                        fontSize: actionButtonSize, color: fontColor))),
+            SizedBox(
+              width: 30,
+            ),
+            TextButton(
+                onPressed: () {},
+                child: Text("SERVICE",
+                    style: TextStyle(
+                        fontSize: actionButtonSize, color: fontColor))),
+            SizedBox(
+              width: 30,
+            ),
+            TextButton(
+                onPressed: () {},
+                child: Text("PROJECT",
+                    style: TextStyle(
+                        fontSize: actionButtonSize, color: fontColor))),
+            SizedBox(
+              width: 30,
+            ),
+            TextButton(
+                onPressed: () {},
+                child: Text("CONTACT",
+                    style: TextStyle(
+                        fontSize: actionButtonSize, color: fontColor))),
+            SizedBox(
+              width: 30,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4),
+                  border: Border.all(color: Colors.green, width: 1)),
+              child: TextButton(
+                  style:
+                      TextButton.styleFrom(backgroundColor: Colors.transparent),
+                  onPressed: () {},
+                  child: Text("RESUME",
+                      style: TextStyle(
+                          fontSize: actionButtonSize, color: fontColor))),
+            ),
+            SizedBox(
+              width: 30,
+            ),
+            SizedBox(
+                width: 80,
+                height: 30,
+                child: FittedBox(
+                    fit: BoxFit.contain,
+                    child: Switch(
+                      value: light,
+                      overlayColor: overlayColor,
+                      trackColor: trackColor,
+                      thumbColor:
+                          const MaterialStatePropertyAll<Color>(Colors.black),
+                      onChanged: (bool value) {
+                        // This is called when the user toggles the switch.
+                        setState(() {
+                          light = value;
+                        });
+                      },
+                    ))),
+            SizedBox(
+              width: 30,
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: SingleChildScrollView(
+            child: Center(
+                child: Align(
+          alignment: Alignment.topLeft,
+          child: Row(children: [
+            Container(
+                margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+                child: Image.asset(
+                  'assets/imgpsh_fullsize_anim.jpg',
+                  color: Colors.white.withOpacity(0.5),
+                  colorBlendMode: BlendMode.softLight,
+                )),
+            Expanded(
+                child: Center(
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    Text(
+                      "WELCOME TO MY PORTFOLIO",
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 3.0),
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                    AnimatedEmoji(
+                      AnimatedEmojis.wave,
+                      size: 50,
+                    ),
+                  ]),
+                  Text(
+                    "S R Ashwin kumar",
+                    style: TextStyle(
+                        fontSize: 50,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1.0,
+                        fontFamily: ''),
+                  ),
+                ])))
+          ]),
+        ))));
   }
 }
