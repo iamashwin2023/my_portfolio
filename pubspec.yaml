@@ -36,11 +36,13 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   animated_emoji: ^3.0.0
+  font_awesome_flutter: ^10.6.0
+  animated_text_kit: ^4.2.2
+  google_fonts: ^6.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  google_fonts: ^2.1.0 
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -64,6 +66,12 @@ flutter:
   assets:
     - assets/WhatsApp Image 2022-02-21 at 12.35.33 AM.jpeg
     - assets/imgpsh_fullsize_anim.jpg
+    - assets/png-clipart-social-media-instagram-login-graphy-ig-instagram-icon-rectangle-magenta.png
+    - assets/about-me.png
+    - assets/user-profile.png
+    - assets/startup.gif
+    - assets/user-profile.gif
+    - assets/arrow-right.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
