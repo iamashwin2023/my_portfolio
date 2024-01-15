@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:animated_emoji/animated_emoji.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:o3d/o3d.dart';
 
 void main() {
   runApp(const MyApp());
@@ -53,6 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
   static const double actionButtonSize = 15.0;
   Color fontColor = Colors.black;
   bool light = true;
+  Color c = const Color(0x2D3250);
 
   @override
   Widget build(BuildContext context) {
@@ -91,9 +92,13 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.transparent,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(255, 0, 101, 114),
+        toolbarHeight: 100,
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: Icon(
+            Icons.menu,
+            color: Colors.white,
+          ),
           onPressed: () {
             // Handle menu button press
             // You can open a drawer, show a menu, or perform any other action here
@@ -106,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Text(
                 "HOME",
                 style: GoogleFonts.lato(
-                    color: Colors.black, fontSize: actionButtonSize),
+                    color: Colors.white, fontSize: actionButtonSize),
               )),
           SizedBox(
             width: 30,
@@ -115,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {},
               child: Text("ABOUT",
                   style: GoogleFonts.lato(
-                      color: Colors.black, fontSize: actionButtonSize))),
+                      color: Colors.white, fontSize: actionButtonSize))),
           SizedBox(
             width: 30,
           ),
@@ -123,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {},
               child: Text("SERVICE",
                   style: GoogleFonts.lato(
-                      color: Colors.black, fontSize: actionButtonSize))),
+                      color: Colors.white, fontSize: actionButtonSize))),
           SizedBox(
             width: 30,
           ),
@@ -131,7 +136,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {},
               child: Text("PROJECT",
                   style: GoogleFonts.lato(
-                      color: Colors.black, fontSize: actionButtonSize))),
+                      color: Colors.white, fontSize: actionButtonSize))),
           SizedBox(
             width: 30,
           ),
@@ -139,21 +144,21 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {},
               child: Text("CONTACT",
                   style: GoogleFonts.lato(
-                      color: Colors.black, fontSize: actionButtonSize))),
+                      color: Colors.white, fontSize: actionButtonSize))),
           SizedBox(
             width: 30,
           ),
           Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(4),
-                border: Border.all(color: Colors.green, width: 1)),
+                border: Border.all(color: Colors.grey, width: 1)),
             child: TextButton(
                 style:
                     TextButton.styleFrom(backgroundColor: Colors.transparent),
                 onPressed: () {},
                 child: Text("RESUME",
                     style: GoogleFonts.lato(
-                        color: Colors.black, fontSize: actionButtonSize))),
+                        color: Colors.white, fontSize: actionButtonSize))),
           ),
           SizedBox(
             width: 30,
@@ -184,75 +189,90 @@ class _MyHomePageState extends State<MyHomePage> {
       body: SingleChildScrollView(
           child: Center(
               child: Align(
-        alignment: Alignment.topLeft,
+        alignment: Alignment.center,
         child: Column(children: [
-          Row(
-              children: [
-            Container(
-              width: 500,
-              height: 800,
-              margin: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fitWidth,
-                      alignment: FractionalOffset.topCenter,
-                      image: AssetImage("assets/imgpsh_fullsize_anim.jpg"))),
-            ),
-            Expanded(
-                child: Center(
-              child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Container(
+              color: Color.fromARGB(255, 0, 101, 114),
+              height: 905,
+              child: Center(
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            RichText(
+                              text: TextSpan(
+                                text: "Hi There, Welcome To My Portfolio",
+                                style: GoogleFonts.openSans(
+                                    color: Colors.white,
+                                    fontSize: 50,
+                                    fontWeight: FontWeight.w100,
+                                    letterSpacing: 5),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 20,
+                            ),
+                            AnimatedEmoji(
+                              AnimatedEmojis.wave,
+                              size: 50,
+                            ),
+                          ]),
                       Text(
-                        "WELCOME TO MY PORTFOLIO",
-                        style: GoogleFonts.breeSerif(
-                            color: Colors.black,
-                            fontSize: 30,
-                            fontWeight: FontWeight.w700,
-                            letterSpacing: 5),
+                        "I Am Ashwin kumar",
+                        style: GoogleFonts.openSans(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            fontSize: 50,
+                            fontWeight: FontWeight.w100,
+                            letterSpacing: 3),
                       ),
-                      SizedBox(
-                        width: 20,
-                      ),
-                      AnimatedEmoji(
-                        AnimatedEmojis.wave,
-                        size: 50,
-                      ),
-                    ]),
-                    Text(
-                      "S R Ashwin kumar",
-                      style: GoogleFonts.exo2(
-                          color: Colors.black,
-                          fontSize: 50,
-                          fontWeight: FontWeight.w600,
-                          letterSpacing: 3),
-                    ),
-                    AnimatedTextKit(animatedTexts: [
-                      TyperAnimatedText("Software Engineering :)",
-                          textStyle: TextStyle(
-                              fontSize: 30,
-                              fontWeight: FontWeight.w700,
-                              color: Color.fromARGB(255, 167, 86, 75),
+                      AnimatedTextKit(animatedTexts: [
+                        TyperAnimatedText("Software Engineering :)",
+                            textStyle: GoogleFonts.openSans(
+                              fontSize: 50,
+                              fontWeight: FontWeight.w100,
+                              color: Color.fromARGB(255, 195, 204, 255),
                               letterSpacing: 1.0,
-                              fontFamily: ''))
+                            ))
+                      ]),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            IconButton(
+                                iconSize: 40,
+                                onPressed: () {},
+                                icon: FaIcon(
+                                  FontAwesomeIcons.instagram,
+                                  color: Colors.white,
+                                )),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            IconButton(
+                                iconSize: 40,
+                                onPressed: () {},
+                                icon: FaIcon(
+                                  FontAwesomeIcons.linkedin,
+                                  color: Colors.white,
+                                )),
+                            SizedBox(
+                              width: 50,
+                            ),
+                            IconButton(
+                                iconSize: 40,
+                                onPressed: () {},
+                                icon: FaIcon(
+                                  FontAwesomeIcons.github,
+                                  color: Colors.white,
+                                )),
+                            SizedBox(
+                              width: 50,
+                            ),
+                          ]),
                     ]),
-                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(
-                            FontAwesomeIcons.instagram,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.linkedin)),
-                      IconButton(
-                          onPressed: () {},
-                          icon: FaIcon(FontAwesomeIcons.github))
-                    ]),
-                  ]),
-            ))
-          ].reversed.toList()),
+              )),
           SizedBox(
             height: 20,
           ),
@@ -409,7 +429,21 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Image.asset("assets/startup.gif"),
                   ),
                 ],
-              )),
+              )), //this is for service
+          Container(
+            width: screenWidth * 0.9,
+            height: screenHeight * 0.2,
+          ),
+          //this is for project
+          Container(
+            width: screenWidth * 0.9,
+            height: screenHeight * 0.2,
+          ),
+          //this is for contect
+          Container(
+            width: screenWidth * 0.9,
+            height: screenHeight * 0.2,
+          )
         ]),
       ))),
       backgroundColor: Colors.white,
